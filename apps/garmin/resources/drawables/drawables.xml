@@ -1,0 +1,6 @@
+<drawables>
+    <!-- Tiny monochrome launcher icon (40x40, 8-bit grayscale PNG).
+         Memory constraint: this is the ONLY bitmap in the app; every other
+         visual is drawn with primitives. -->
+    <bitmap id="LauncherIcon" filename="launcher_icon.png"/>
+</drawables>

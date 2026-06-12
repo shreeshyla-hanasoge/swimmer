@@ -1,0 +1,51 @@
+{
+  "$schema": "./README.md#defaults",
+  "version": 1,
+  "description": "Tunable defaults shared by every platform. Units are explicit in each key name. User-facing settings (poolLength, hrTargetOffset, protocol, vibrate) override these at runtime; the rest are engineering constants that protect correctness and should rarely change.",
+
+  "pool": {
+    "lengthMeters": 25.0,
+    "comment": "Distance is ALWAYS confirmedLaps x lengthMeters. Decimal metres allowed (e.g. 18.5). Never derived from strokes or GPS."
+  },
+
+  "heartRate": {
+    "targetOffsetBpm": 25,
+    "comment_targetOffsetBpm": "Default breathing target = end-of-set HR minus this. Configurable.",
+    "absoluteFloorBpm": 60,
+    "comment_absoluteFloorBpm": "Never set a relative target below this floor.",
+    "smoothingWindowSamples": 5,
+    "comment_smoothingWindowSamples": "Rolling average over the last N samples for display AND target comparison (raw HR is too jumpy).",
+    "sampleIntervalMs": 1000,
+    "recoveryWindowSec": 60,
+    "comment_recoveryWindowSec": "HR recovery summary stat = HR drop over this window."
+  },
+
+  "autoStop": {
+    "debounceMs": 4000,
+    "comment_debounceMs": "Smoothed HR must stay <= target continuously for this long before stopping.",
+    "hardCapMs": 120000,
+    "comment_hardCapMs": "Absolute ceiling on a breathing set so the user is never trapped above target.",
+    "nullCountsAsBelow": false,
+    "comment_nullCountsAsBelow": "Dropped/absent HR readings do NOT count as below target; they reset the debounce timer.",
+    "staleSampleMs": 5000,
+    "comment_staleSampleMs": "If no fresh HR sample within this window, treat HR as unavailable."
+  },
+
+  "breathing": {
+    "defaultProtocol": "box",
+    "recoveryDurationMs": 60000,
+    "comment_recoveryDurationMs": "End-of-session recovery: fixed duration, no HR target."
+  },
+
+  "ui": {
+    "resumingCountdownSec": 3,
+    "comment_resumingCountdownSec": "'Resuming 3 . 2 . 1' after a breathing set, then back to REST.",
+    "lapDebounceMs": 600,
+    "comment_lapDebounceMs": "Ignore repeat LAP presses within this window (bouncy buttons / accidental double-tap at the wall)."
+  },
+
+  "openWater": {
+    "allowGps": true,
+    "comment": "GPS is ONLY acceptable for a future open-water mode. Never for pool or kick distance."
+  }
+}

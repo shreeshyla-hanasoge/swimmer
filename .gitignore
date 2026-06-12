@@ -1,0 +1,38 @@
+# --- Connect IQ / Monkey C build output ---
+apps/garmin/bin/
+*.prg
+*.prg.debug.xml
+*.iq
+*.mpkg
+
+# --- Developer signing keys (NEVER commit) ---
+developer_key
+developer_key.pem
+*.der
+*.pem
+
+# --- Connect IQ tooling ---
+.tmp/
+*.cfg.log
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# --- Future platforms ---
+# watchOS (Xcode)
+apps/watchos/build/
+apps/watchos/DerivedData/
+*.xcuserstate
+# Wear OS (Gradle)
+apps/wearos/build/
+apps/wearos/.gradle/
+apps/wearos/local.properties
+
+# --- Server (future) ---
+server/node_modules/
+server/.aws-sam/
+server/cdk.out/

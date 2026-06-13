@@ -1,0 +1,18 @@
+# SwimCoach — Connect IQ build configuration (jungle).
+#
+# Build:   monkeyc -f monkey.jungle -d instinct2x -o bin/SwimCoach.prg -y <dev_key>
+# Run:     connectiq (simulator) then `monkeydo bin/SwimCoach.prg instinct2x`
+# Tests:   monkeyc -f monkey.jungle -d instinct2x --unit-test -o bin/SwimCoachTest.prg -y <dev_key>
+#          then `monkeydo bin/SwimCoachTest.prg instinct2x -t`
+#
+# See apps/garmin/README.md for full SDK setup.
+
+project.manifest = manifest.xml
+
+# Default sources + resources for every product.
+base.sourcePath = source
+base.resourcePath = resources
+
+# Unit tests are compiled in only for --unit-test builds via the build flag;
+# the test sources live under source/tests and are excluded from release builds
+# by the (:test) annotation on every test method (dead-code-stripped otherwise).

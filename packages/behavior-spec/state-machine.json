@@ -1,0 +1,59 @@
+{
+  "$schema": "./README.md#state-machine",
+  "version": 1,
+  "description": "Language-neutral session state machine. Every platform drives transitions from this file rather than hardcoding them, so behaviour stays identical across Garmin, watchOS and Wear OS. 'event' names are abstract (mapped to physical buttons per device); 'guard' names are evaluated by the platform's controller.",
+  "initial": "MODE_SELECT",
+  "states": {
+    "MODE_SELECT": {
+      "description": "Pick Swim or Kick. No recording yet.",
+      "onEnter": ["stopAnyRecording"],
+      "transitions": [
+        { "event": "SELECT_SWIM", "target": "ACTIVE", "effects": ["startSession:swim"] },
+        { "event": "SELECT_KICK", "target": "ACTIVE", "effects": ["startSession:kick"] }
+      ]
+    },
+    "ACTIVE": {
+      "description": "Recording. Each LAP press confirms one completed length (distance = laps x poolLength).",
+      "onEnter": ["resumeRecording"],
+      "transitions": [
+        { "event": "LAP",  "target": "ACTIVE", "effects": ["confirmLap"] },
+        { "event": "REST", "target": "REST",   "effects": ["pauseRecording", "markRestStart"] },
+        { "event": "STOP", "target": "SUMMARY", "effects": ["endSession"] }
+      ]
+    },
+    "REST": {
+      "description": "At the wall / paused. Shows running totals. LAP pushes off into the next length.",
+      "onEnter": ["showRestTotals"],
+      "transitions": [
+        { "event": "LAP",        "target": "ACTIVE",    "effects": ["resumeRecording"] },
+        { "event": "BREATHE",    "target": "BREATHING", "effects": ["startBreathing:hrTarget"] },
+        { "event": "RECOVER",    "target": "RECOVERY",  "effects": ["startBreathing:fixedDuration"] },
+        { "event": "STOP",       "target": "SUMMARY",   "effects": ["endSession"] }
+      ]
+    },
+    "BREATHING": {
+      "description": "HR-targeted breathing set. Auto-stops when smoothed HR <= target (debounced) or at the hard cap. On stop, runs the Resuming 3-2-1 countdown, then returns to REST.",
+      "onEnter": ["captureBaselineHr", "beginBreathingLoop"],
+      "transitions": [
+        { "event": "HR_TARGET_MET", "target": "REST", "effects": ["recordBreathingSet:hrTargetMet", "doneBuzz", "resumingCountdown"] },
+        { "event": "HARD_CAP",      "target": "REST", "effects": ["markTargetNotReached", "doneBuzz", "resumingCountdown"] },
+        { "event": "CANCEL",        "target": "REST", "effects": ["abortBreathing"] }
+      ]
+    },
+    "RECOVERY": {
+      "description": "End-of-session recovery: same breathing controller, no HR target, fixed duration. Captures HR recovery (drop over 60s).",
+      "onEnter": ["captureBaselineHr", "beginRecoveryLoop"],
+      "transitions": [
+        { "event": "DURATION_DONE", "target": "SUMMARY", "effects": ["captureHrRecovery", "endSession"] },
+        { "event": "CANCEL",        "target": "REST",    "effects": ["abortBreathing"] }
+      ]
+    },
+    "SUMMARY": {
+      "description": "Final totals: distance, laps, splits, pace, HR recovery. Offers sync (future).",
+      "onEnter": ["computeSummary", "queueSyncPayload"],
+      "transitions": [
+        { "event": "DONE", "target": "MODE_SELECT", "effects": ["reset"] }
+      ]
+    }
+  }
+}

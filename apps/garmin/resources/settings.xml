@@ -1,0 +1,23 @@
+<settings>
+    <setting propertyKey="@Properties.poolLengthMeters" title="@Strings.SetPoolLength">
+        <!-- Decimal metres; covers 12.5 m up to 50 m pools. -->
+        <settingConfig type="numeric" min="5.0" max="50.0"/>
+    </setting>
+
+    <setting propertyKey="@Properties.hrTargetOffsetBpm" title="@Strings.SetHrOffset">
+        <!-- Breathing target = end-of-set HR minus this. -->
+        <settingConfig type="numeric" min="5" max="60"/>
+    </setting>
+
+    <setting propertyKey="@Properties.breathingProtocol" title="@Strings.SetProtocol">
+        <settingConfig type="list">
+            <listEntry value="box">@Strings.SetProtocolBox</listEntry>
+            <listEntry value="478">@Strings.SetProtocol478</listEntry>
+            <listEntry value="coherent">@Strings.SetProtocolCoherent</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.recoveryDurationSec" title="@Strings.SetRecoverySec">
+        <settingConfig type="numeric" min="20" max="180"/>
+    </setting>
+</settings>

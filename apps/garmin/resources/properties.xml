@@ -1,0 +1,10 @@
+<properties>
+    <!-- User-tunable settings (mirrored in settings.xml). Defaults here match
+         packages/behavior-spec/defaults.json so the app behaves identically to
+         the spec out of the box. -->
+    <property id="poolLengthMeters" type="float">25.0</property>
+    <property id="hrTargetOffsetBpm" type="number">25</property>
+    <!-- breathing protocol key: "box" | "478" | "coherent" -->
+    <property id="breathingProtocol" type="string">box</property>
+    <property id="recoveryDurationSec" type="number">60</property>
+</properties>

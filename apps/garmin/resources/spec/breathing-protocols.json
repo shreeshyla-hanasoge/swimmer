@@ -1,0 +1,40 @@
+{
+  "$schema": "./README.md#breathing-protocols",
+  "version": 1,
+  "description": "Phase timings for vibration-guided breathing sets. All durations are in milliseconds. 'phases' run in order and repeat until a stop condition (HR target or hard cap) is met. Each phase declares a haptic cue so every platform produces the same felt pattern. haptic.kind is symbolic; platforms map it to their own vibration API (see resources/spec and Haptics module on Garmin).",
+  "haptics": {
+    "inhale":  { "kind": "long",      "pulses": 1, "dutyCycle": 75, "lengthMs": 800, "gapMs": 0,   "note": "one long pulse = breathe in" },
+    "exhale":  { "kind": "twoShort",  "pulses": 2, "dutyCycle": 60, "lengthMs": 180, "gapMs": 120, "note": "two short pulses = breathe out" },
+    "hold":    { "kind": "tap",       "pulses": 1, "dutyCycle": 40, "lengthMs": 120, "gapMs": 0,   "note": "single tap = hold" },
+    "done":    { "kind": "doneBuzz",  "pulses": 3, "dutyCycle": 90, "lengthMs": 250, "gapMs": 120, "note": "the 'boom' when HR target is met" }
+  },
+  "protocols": {
+    "box": {
+      "label": "Box 4-4-4-4",
+      "default": true,
+      "phases": [
+        { "name": "inhale", "durationMs": 4000, "haptic": "inhale" },
+        { "name": "hold",   "durationMs": 4000, "haptic": "hold" },
+        { "name": "exhale", "durationMs": 4000, "haptic": "exhale" },
+        { "name": "hold",   "durationMs": 4000, "haptic": "hold" }
+      ]
+    },
+    "478": {
+      "label": "4-7-8",
+      "default": false,
+      "phases": [
+        { "name": "inhale", "durationMs": 4000, "haptic": "inhale" },
+        { "name": "hold",   "durationMs": 7000, "haptic": "hold" },
+        { "name": "exhale", "durationMs": 8000, "haptic": "exhale" }
+      ]
+    },
+    "coherent": {
+      "label": "Coherent 5-5",
+      "default": false,
+      "phases": [
+        { "name": "inhale", "durationMs": 5500, "haptic": "inhale" },
+        { "name": "exhale", "durationMs": 5500, "haptic": "exhale" }
+      ]
+    }
+  }
+}

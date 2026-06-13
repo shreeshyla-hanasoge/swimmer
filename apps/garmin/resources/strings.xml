@@ -1,0 +1,43 @@
+<strings>
+    <string id="AppName">SwimCoach</string>
+
+    <!-- Mode select -->
+    <string id="ModeSwim">SWIM</string>
+    <string id="ModeKick">KICK</string>
+    <string id="ModeSelectHint">START: pick  -  UP/DOWN: switch</string>
+
+    <!-- Active -->
+    <string id="LabelDist">DIST</string>
+    <string id="LabelLaps">LAPS</string>
+    <string id="LabelLast">LAST</string>
+    <string id="LabelPace">/100</string>
+    <string id="LabelRest">REST</string>
+    <string id="LabelTotal">TOTAL</string>
+
+    <!-- Breathing -->
+    <string id="LabelBpm">BPM</string>
+    <string id="LabelTarget">TGT</string>
+    <string id="PhaseInhale">IN</string>
+    <string id="PhaseExhale">OUT</string>
+    <string id="PhaseHold">HOLD</string>
+    <string id="TargetNotReached">TARGET NOT REACHED</string>
+    <string id="Resuming">RESUMING</string>
+    <string id="Recovery">RECOVERY</string>
+
+    <!-- HR availability hint (constraint section 4) -->
+    <string id="HrUnavailable">HR --</string>
+    <string id="HrSetupHint">Enable wrist HR in swim, or pair strap</string>
+
+    <!-- Summary -->
+    <string id="SummaryTitle">DONE</string>
+    <string id="LabelHrDrop">HR DROP</string>
+
+    <!-- Settings -->
+    <string id="SetPoolLength">Pool length (m)</string>
+    <string id="SetHrOffset">HR target offset (bpm)</string>
+    <string id="SetProtocol">Breathing protocol</string>
+    <string id="SetProtocolBox">Box 4-4-4-4</string>
+    <string id="SetProtocol478">4-7-8</string>
+    <string id="SetProtocolCoherent">Coherent 5-5</string>
+    <string id="SetRecoverySec">Recovery duration (s)</string>
+</strings>

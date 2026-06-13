@@ -1,0 +1,16 @@
+<resources>
+    <!--
+      The behavior-spec embedded as JSON resources. These files are a SYNCED
+      COPY of the canonical source of truth in packages/behavior-spec/ (see that
+      package's README). Keep them byte-identical:
+
+          cp packages/behavior-spec/*.json apps/garmin/resources/spec/
+
+      The app loads them via WatchUi.loadResource(Rez.JsonData.*) in Spec.mc,
+      guarded by (Rez has :JsonData). This is what lets the Garmin app DRIVE its
+      state machine and timings from data rather than hardcoding them.
+    -->
+    <jsonData id="SpecStateMachine"   filename="spec/state-machine.json"/>
+    <jsonData id="SpecBreathing"      filename="spec/breathing-protocols.json"/>
+    <jsonData id="SpecDefaults"       filename="spec/defaults.json"/>
+</resources>
